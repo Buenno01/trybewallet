@@ -1,7 +1,14 @@
-import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Login from './pages/Login';
 
 function App() {
-  return <div>Hello, TrybeWallet!</div>;
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Routes>
+        <Route path="/" element={ <Login /> } />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
