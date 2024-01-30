@@ -21,7 +21,7 @@ function Login() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate('/carteira');
-    dispatch(loginAction(form.email));
+    dispatch(loginAction({ ...form }));
   };
 
   return (

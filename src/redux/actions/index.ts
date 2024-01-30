@@ -1,8 +1,10 @@
-const actionCreator = (type:string, payload:any) => {
+import { LoginFormType } from '../../@types/LoginFormType';
+
+const createAction = (type:string, payload:any) => {
   return {
     type,
     payload,
   };
 };
 
-export const loginAction = (email:string) => actionCreator('LOGIN', email);
+export const loginAction = ({ email }: LoginFormType) => createAction('LOGIN', { email });
