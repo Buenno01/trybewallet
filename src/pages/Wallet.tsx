@@ -1,5 +1,11 @@
+import Header from '../components/Header';
+
 function Wallet() {
-  return <div>TrybeWallet</div>;
+  return (
+    <div className="flex">
+      <Header />
+    </div>
+  );
 }
 
 export default Wallet;

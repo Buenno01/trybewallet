@@ -2,7 +2,7 @@ import { AnyAction } from 'redux';
 import { WalletType } from '../../@types/WalletType';
 
 const initialState: WalletType = {
-  currencies: [],
+  currencies: ['BRL'],
   expenses: [],
   editor: false,
   idToEdit: 0,
