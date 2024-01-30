@@ -6,7 +6,22 @@ module.exports = {
     "./src/*.tsx",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'coins-pattern': "url('./src/assets/foto-fundo.png')"
+      },
+      colors: {
+        'primary-green': '#5FD149',
+        'secondary-green': '#036B52',
+        'primary-purple': '#8958A3',
+        'secondary-purple': '#771884',
+        'primary-blue': '#00D5E2',
+        'secondary-blue': '#003BE5',
+        'primary-white': '#E1E5EB',
+        'primary-gray': '#444955',
+        'primary-black': '#1A1B1C',
+      }
+    },
   },
   plugins: [],
 }

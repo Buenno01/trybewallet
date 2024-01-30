@@ -4,11 +4,16 @@ import Wallet from './pages/Wallet';
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Routes>
-        <Route path="/" element={ <Login /> } />
-        <Route path="/carteira" element={ <Wallet /> } />
-      </Routes>
+    <div className="bg-emerald-400">
+      <div
+        className="h-screen flex flex-col
+      bg-coins-pattern bg-cover bg-no-repeat"
+      >
+        <Routes>
+          <Route path="/" element={ <Login /> } />
+          <Route path="/carteira" element={ <Wallet /> } />
+        </Routes>
+      </div>
     </div>
   );
 }

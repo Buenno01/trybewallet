@@ -9,7 +9,7 @@ function Button({ text, Icon = undefined, ...rest }:ButtonProps) {
   return (
     <button
       className="
-      bg-blue-500 hover:bg-blue-700 disabled:bg-blue-300
+      bg-secondary-blue hover:bg-opacity-80 active:bg-opacity-70 disabled:bg-opacity-50
       text-white font-bold
       py-2 px-4 rounded"
       { ...rest }
