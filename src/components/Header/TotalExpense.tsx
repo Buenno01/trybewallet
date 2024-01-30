@@ -1,4 +1,5 @@
 import { ExpenseType } from '../../@types/WalletType';
+import MoedasIcone from '../../assets/Moedas.svg';
 
 type TotalExpenseProps = {
   expenses: ExpenseType[];
@@ -7,11 +8,15 @@ type TotalExpenseProps = {
 
 function TotalExpense({ expenses, selectedCurrency }: TotalExpenseProps) {
   return (
-    <p>
+    <p className="text-secondary-blue flex items-center gap-2">
+      <span>
+        <img src={ MoedasIcone } alt="Icone moedas" />
+      </span>
+      <b>
+        Total de despesas:
+      </b>
       <span data-testid="total-field">
-        Despesa Total:
-        {' '}
-        {expenses.reduce((acc, curr) => acc + curr.value, 0)}
+        {expenses.reduce((acc, curr) => acc + curr.value, 0).toFixed(2)}
       </span>
       <span data-testid="header-currency-field">
         {' '}

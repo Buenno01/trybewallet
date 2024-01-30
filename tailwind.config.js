@@ -11,7 +11,7 @@ module.exports = {
         'coins-pattern': "url('./src/assets/foto-fundo.png')"
       },
       colors: {
-        'primary-green': '#5FD149',
+        'primary-green': '#2FC18C',
         'secondary-green': '#036B52',
         'primary-purple': '#8958A3',
         'secondary-purple': '#771884',

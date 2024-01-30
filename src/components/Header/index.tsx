@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { GlobalStateType } from '../../@types/GlobalStateType';
 import Logo from '../Logo';
 import TotalExpense from './TotalExpense';
+import UserInfo from './UserInfo';
 
 function Header() {
   const {
@@ -10,21 +11,20 @@ function Header() {
   } = useSelector((state: GlobalStateType) => state);
 
   return (
-    <header className="flex justify-center w-full h-16 items-center">
-      <div className="flex justify-between container">
+    <header
+      className="flex justify-center gap-10 w-4/5 h-16 items-center
+    bg-white py-20 shadow-lg rounded-b-lg"
+    >
+      <span
+        className="flex justify-center gap-10 items-baseline w-full"
+      >
         <Logo />
-        <span className="flex gap-4">
-          <p data-testid="email-field">
-            Email:
-            {' '}
-            {globalUser.email}
-          </p>
-          <TotalExpense
-            expenses={ globalWallet.expenses }
-            selectedCurrency={ globalWallet.currencies[0] }
-          />
-        </span>
-      </div>
+        <TotalExpense
+          expenses={ globalWallet.expenses }
+          selectedCurrency={ globalWallet.currencies[0] }
+        />
+        <UserInfo email={ globalUser.email } />
+      </span>
     </header>
   );
 }

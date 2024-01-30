@@ -29,7 +29,7 @@ function Login() {
     <div className="flex flex-col h-screen justify-center">
       <form
         className="w-1/3 py-16 px-28 flex flex-col gap-16
-        self-center bg-primary-white rounded-lg shadow-lg"
+        self-center bg-white rounded-lg shadow-lg"
         onSubmit={ handleSubmit }
       >
         <span className="flex justify-center w-full">
