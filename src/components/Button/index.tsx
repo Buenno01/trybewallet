@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, ElementType } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   Icon?: ElementType;
@@ -8,11 +9,14 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 function Button({ text, Icon = undefined, ...rest }:ButtonProps) {
   return (
     <button
-      className="
+      { ...rest }
+      className={ twMerge(
+        `
       bg-secondary-blue hover:bg-opacity-80 active:bg-opacity-70 disabled:bg-opacity-50
       text-white font-bold
-      py-2 px-4 rounded"
-      { ...rest }
+      py-2 px-4 rounded`,
+        rest.className,
+      ) }
     >
       {text}
       {Icon && <Icon />}
