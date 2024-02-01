@@ -53,6 +53,7 @@ function Login() {
             onChange={ handleChange }
           >
             <Input.Button
+              data-testid="eye-button"
               Icon={
             showPassword ? FaRegEye : FaRegEyeSlash
           }
