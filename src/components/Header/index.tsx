@@ -21,7 +21,7 @@ function Header() {
         <Logo />
         <TotalExpense
           expenses={ globalWallet.expenses }
-          selectedCurrency={ globalWallet.currencies[0] }
+          selectedCurrency="BRL"
         />
         <UserInfo email={ globalUser.email } />
       </span>
