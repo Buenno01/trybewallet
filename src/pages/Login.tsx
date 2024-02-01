@@ -6,7 +6,7 @@ import Input from '../components/Input';
 import { LoginFormType } from '../@types/LoginFormType';
 import Button from '../components/Button';
 import { loginAction } from '../redux/actions';
-import useForm from '../utils/useForm';
+import useForm from '../hooks/useForm';
 import Logo from '../components/Logo';
 
 function Login() {
