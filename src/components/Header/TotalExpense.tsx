@@ -17,7 +17,10 @@ function TotalExpense({ expenses, selectedCurrency }: TotalExpenseProps) {
       </b>
       <span data-testid="total-field">
         {
-        expenses.reduce((acc, curr) => acc + (curr.value * curr.exchangeRates[0]), 0)
+        expenses.reduce((acc, curr) => {
+          acc += (Number(curr.value) * Number(curr.exchangeRates[curr.currency].ask));
+          return acc;
+        }, 0)
           .toFixed(2)
         }
       </span>

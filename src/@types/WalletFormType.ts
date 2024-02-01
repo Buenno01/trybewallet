@@ -1,5 +1,5 @@
 export type WalletFormType = {
-  value: number,
+  value: string,
   currency: string,
   method: string,
   tag: string,

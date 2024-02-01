@@ -1,13 +1,15 @@
+import { ExchangeRates } from './ExchangeRateType';
+
 export type CurrenciesType = string[];
 
 export type ExpenseType = {
   id: number,
-  value: number,
+  value: string,
   currency: string,
   method: string,
   tag: string,
   description: string,
-  exchangeRates: number[],
+  exchangeRates: ExchangeRates,
 };
 
 export type WalletType = {
