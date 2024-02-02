@@ -1,11 +1,10 @@
 import { WalletType } from '../../@types/WalletType';
 import { ADD_EXPENSE, LOAD_CURRENCIES } from '../actions';
 import WalletActions from '../../@types/WalletActions';
-import mockExpenses from '../../tests/helpers/mockExpenses';
 
 const initialState: WalletType = {
   currencies: [],
-  expenses: mockExpenses,
+  expenses: [],
   editor: false,
   idToEdit: 0,
 };
