@@ -20,13 +20,17 @@ function Table() {
   return (
     <div className="w-5/6 bg-secondary-blue rounded-xl py-5 px-16">
       <table className="w-full">
-        <TableRow className="border-b-2 text-white border-white">
+        <thead
+          data-testid="table-heading"
+          className="flex w-full h-12 content-center items-center
+          border-b-2 text-white border-white"
+        >
           {tableHeading.map((heading) => (
             <TableHeading key={ heading }>
               {heading}
             </TableHeading>
           ))}
-        </TableRow>
+        </thead>
         <tbody>
           {
           expenses.map((expense) => (

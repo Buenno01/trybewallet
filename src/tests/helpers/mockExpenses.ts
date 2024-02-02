@@ -1,3 +1,4 @@
+import { GlobalStateType } from '../../@types/GlobalStateType';
 import { ExpenseType } from '../../@types/WalletType';
 import mockData from './mockData';
 
@@ -33,5 +34,15 @@ const mockExpenses: ExpenseType[] = [
     exchangeRates: mockData,
   },
 ];
+
+export const mockInitialStateExpenses: GlobalStateType = {
+  user: { email: 'tryber@teste.com' },
+  wallet: {
+    currencies: [],
+    expenses: mockExpenses,
+    editor: false,
+    idToEdit: 0,
+  },
+};
 
 export default mockExpenses;

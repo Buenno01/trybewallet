@@ -12,15 +12,19 @@ const getInputsAndButton = () => ({
   value: screen.getByTestId(/value-input/i),
   method: screen.getByTestId(/method-input/i),
   currency: screen.getByTestId(/currency-input/i),
-  button: screen.getByText(/Adicionar despesa/i),
+  button: screen.getByRole('button', { name: /Adicionar despesa/i }),
 });
 
-const fillForm = async (user: UserEvent) => {
+export const fillForm = async (user: UserEvent) => {
   const { description, tag, value, method, currency } = getInputsAndButton();
 
+  await user.clear(description);
   await user.type(description, 'Test description');
-  await user.selectOptions(tag, 'Alimentação');
+
+  await user.clear(value);
   await user.type(value, '100');
+
+  await user.selectOptions(tag, 'Alimentação');
   await user.selectOptions(method, 'Dinheiro');
   await user.selectOptions(currency, 'USD');
 };
@@ -33,13 +37,16 @@ const mockFormState = {
   currency: 'USD',
 };
 
-const mockFetch = () => vi.spyOn(global, 'fetch').mockResolvedValue({
+export const mockFetch = () => vi.spyOn(global, 'fetch').mockResolvedValue({
   json: async () => mockData,
   ok: true,
   status: 200,
 } as Response);
 
-describe.only('Wallet Form', () => {
+describe('Wallet Form', () => {
+  beforeEach(() => {
+    vi.restoreAllMocks();
+  });
   it('Should render the wallet form with the inputs and the button', () => {
     mockFetch();
     renderWithRouterAndRedux(<WalletForm />, { initialEntries: ['/carteira'] });

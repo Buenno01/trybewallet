@@ -146,6 +146,7 @@ function WalletForm() {
         </span>
       </fieldset>
       <Button
+        data-testid="submit-btn"
         disabled={ !isValidated }
         onClick={ handleClick }
         className="bg-primary-green"
