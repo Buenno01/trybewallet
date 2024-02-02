@@ -10,7 +10,7 @@ function TableDataCell({ children, ...rest }: TableDataCellProps) {
     <td
       { ...rest }
       className={ twMerge(
-        'flex w-1/8 justify-center',
+        'flex w-1/8 justify-center text-center',
         rest.className,
       ) }
     >

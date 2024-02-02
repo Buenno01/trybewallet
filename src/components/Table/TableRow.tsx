@@ -1,12 +1,20 @@
 import { ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-type TableRowProps = {
+interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   children: ReactNode;
-};
+}
 
-function TableRow({ children }: TableRowProps) {
+function TableRow({ children, ...rest }: TableRowProps) {
   return (
-    <tr className="flex w-full">
+    <tr
+      { ...rest }
+      className={ twMerge(
+        `flex w-full h-12 content-center items-center
+        border-b border-primary-green text-primary-green`,
+        rest.className,
+      ) }
+    >
       {children}
     </tr>
   );

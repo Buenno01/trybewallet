@@ -35,7 +35,7 @@ function TableContent({ expense }: TableContentProps) {
         {Number(value).toFixed(2)}
       </TableDataCell>
 
-      <TableDataCell>
+      <TableDataCell className="text-sm">
         {exchangeRates[currency].name}
       </TableDataCell>
 
@@ -56,17 +56,17 @@ function TableContent({ expense }: TableContentProps) {
         Real
       </TableDataCell>
 
-      <TableDataCell>
+      <TableDataCell className="gap-2 text-xl">
         <Button
           Icon={ FaPencilAlt }
-          className=""
+          className=" w-8 h-8 flex justify-center items-center p-0 text-inherit"
           text=""
           aria-label="Editar"
           onClick={ () => { handleEdit(id); } }
         />
         <Button
           Icon={ FaTrashAlt }
-          className=""
+          className=" w-8 h-8 flex justify-center items-center p-0 text-red-500"
           text=""
           aria-label="Excluir"
           onClick={ () => { handleDelete(id); } }
