@@ -1,13 +1,18 @@
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import { ExpenseType } from '../../@types/WalletType';
 import Button from '../Button';
 import TableDataCell from './TableDataCell';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { removeExpenseAction } from '../../redux/actions';
 
 type TableContentProps = {
   expense: ExpenseType;
 };
 
 function TableContent({ expense }: TableContentProps) {
+  const { expenses } = useTypedSelector((state) => state.wallet);
+  const dispatch = useDispatch();
   const { currency, description, exchangeRates, method, tag, value, id } = expense;
 
   const handleEdit = (expenseId: number) => {
@@ -15,7 +20,7 @@ function TableContent({ expense }: TableContentProps) {
   };
 
   const handleDelete = (expenseId: number) => {
-    return expenseId;
+    dispatch(removeExpenseAction(expenseId, expenses));
   };
   return (
     <>
@@ -66,6 +71,7 @@ function TableContent({ expense }: TableContentProps) {
         />
         <Button
           Icon={ FaTrashAlt }
+          data-testid="delete-btn"
           className=" w-8 h-8 flex justify-center items-center p-0 text-red-500"
           text=""
           aria-label="Excluir"

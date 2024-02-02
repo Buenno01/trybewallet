@@ -7,12 +7,18 @@ import { ExchangeRates } from '../../@types/ExchangeRateType';
 
 export const LOGIN = 'LOGIN';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
 export const LOAD_CURRENCIES = 'LOAD_CURRENCIES';
 
 const createAction = <T>(type:string, payload:T) => ({
   type,
   payload,
 });
+
+export const removeExpenseAction = (id: number, expenses: ExpenseType[]) => {
+  const filteredExpenses = expenses.filter((expense) => expense.id !== id);
+  return createAction<ExpenseType[]>(REMOVE_EXPENSE, filteredExpenses);
+};
 
 export const loadCurrenciesAction = () => {
   return async (dispatch: Dispatch<AnyAction>) => {

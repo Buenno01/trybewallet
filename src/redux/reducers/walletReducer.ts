@@ -1,5 +1,5 @@
 import { WalletType } from '../../@types/WalletType';
-import { ADD_EXPENSE, LOAD_CURRENCIES } from '../actions';
+import { ADD_EXPENSE, LOAD_CURRENCIES, REMOVE_EXPENSE } from '../actions';
 import WalletActions from '../../@types/WalletActions';
 
 const initialState: WalletType = {
@@ -11,6 +11,8 @@ const initialState: WalletType = {
 
 const walletReducer = (state = initialState, action: WalletActions) => {
   switch (action.type) {
+    case REMOVE_EXPENSE:
+      return { ...state, expenses: action.payload };
     case ADD_EXPENSE:
       // todo
       return { ...state, expenses: [...state.expenses, action.payload] };
