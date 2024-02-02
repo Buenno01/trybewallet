@@ -8,12 +8,29 @@ import { ExchangeRates } from '../../@types/ExchangeRateType';
 export const LOGIN = 'LOGIN';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+export const START_EDIT_EXPENSE = 'START_EDIT_EXPENSE';
 export const LOAD_CURRENCIES = 'LOAD_CURRENCIES';
 
 const createAction = <T>(type:string, payload:T) => ({
   type,
   payload,
 });
+
+export const editExpenseAction = (
+  id: number,
+  expense: WalletFormType,
+  expenses: ExpenseType[],
+) => {
+  const editedExpenses = expenses.map((expenseItem) => (
+    expenseItem.id === id ? { ...expenseItem, ...expense } : expenseItem
+  ));
+  return createAction<ExpenseType[]>(EDIT_EXPENSE, editedExpenses);
+};
+
+export const startEditExpenseAction = (expenseId: number) => {
+  return createAction<number>(START_EDIT_EXPENSE, expenseId);
+};
 
 export const removeExpenseAction = (id: number, expenses: ExpenseType[]) => {
   const filteredExpenses = expenses.filter((expense) => expense.id !== id);

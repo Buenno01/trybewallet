@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from 'react';
 type FormElementsTypes = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 type ChangeEventTypes = ChangeEvent<FormElementsTypes>;
 
-const useForm = <T>(initialValues: T):
+const useForm = <T>(initialValues: T, resetValues: T = initialValues):
 [
   values: T,
   handleChange: (e: ChangeEventTypes) => void,
@@ -19,7 +19,7 @@ const useForm = <T>(initialValues: T):
   };
 
   const resetForm = () => {
-    setValues(initialValues);
+    setValues(resetValues);
   };
 
   return [

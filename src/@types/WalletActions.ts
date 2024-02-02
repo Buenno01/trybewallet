@@ -16,6 +16,17 @@ export interface RemoveExpenseAction extends AnyAction {
   payload: ExpenseType[];
 }
 
-type WalletActions = AddExpenseAction | LoadCurrenciesAction | RemoveExpenseAction;
+export interface EditExpenseAction extends AnyAction {
+  type: 'EDIT_EXPENSE';
+  payload: ExpenseType[];
+}
+
+export interface StartEditExpenseAction extends AnyAction {
+  type: 'START_EDIT_EXPENSE';
+  payload: number;
+}
+
+type WalletActions = AddExpenseAction | LoadCurrenciesAction
+| RemoveExpenseAction | EditExpenseAction | StartEditExpenseAction;
 
 export default WalletActions;

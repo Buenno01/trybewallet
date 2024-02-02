@@ -6,7 +6,11 @@ import Input from './Input';
 import Select from './Select';
 import Button from './Button';
 import { GlobalDispatch } from '../@types/GlobalStateType';
-import { addExpenseAction, loadCurrenciesAction } from '../redux/actions';
+import {
+  addExpenseAction,
+  editExpenseAction,
+  loadCurrenciesAction,
+} from '../redux/actions';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const categoryOptions = [
@@ -24,13 +28,17 @@ const paymentOptions = [
 ];
 
 function WalletForm() {
-  const { expenses } = useTypedSelector((state) => state.wallet);
   const dispatch: GlobalDispatch = useDispatch();
   const {
+    editor,
+    idToEdit,
+    expenses,
     currencies: currencyOptions,
   } = useTypedSelector((state) => state.wallet);
 
-  const initialForm: WalletFormType = {
+  const foundedExpense = expenses.find((expense) => expense.id === idToEdit);
+
+  const resetValues: WalletFormType = {
     currency: 'USD',
     description: '',
     method: 'Dinheiro',
@@ -38,7 +46,21 @@ function WalletForm() {
     value: '',
   };
 
-  const [form, handleChange, resetForm] = useForm<WalletFormType>(initialForm);
+  const initialForm: WalletFormType = (editor && foundedExpense)
+    ? {
+      value: foundedExpense.value,
+      currency: foundedExpense.currency,
+      description: foundedExpense.description,
+      method: foundedExpense.method,
+      tag: foundedExpense.tag,
+    }
+    : resetValues;
+
+  const [
+    form,
+    handleChange,
+    resetForm,
+  ] = useForm<WalletFormType>(initialForm, resetValues);
 
   useEffect(() => {
     dispatch(loadCurrenciesAction());
@@ -56,7 +78,11 @@ function WalletForm() {
   );
 
   const handleClick = () => {
-    dispatch(addExpenseAction(form, expenses));
+    if (editor) {
+      dispatch(editExpenseAction(idToEdit, form, expenses));
+    } else {
+      dispatch(addExpenseAction(form, expenses));
+    }
     resetForm();
   };
 
@@ -123,7 +149,7 @@ function WalletForm() {
         disabled={ !isValidated }
         onClick={ handleClick }
         className="bg-primary-green"
-        text="Adicionar despesa"
+        text={ editor ? 'Editar despesa' : 'Adicionar despesa' }
       />
     </form>
   );
