@@ -13,7 +13,7 @@ function Header() {
   return (
     <header
       className="flex justify-center gap-10 w-4/5 h-16 items-center
-    bg-white py-20 shadow-lg rounded-b-lg px-52"
+    bg-white py-20 shadow-lg px-52"
     >
       <span
         className="flex justify-between gap-10 items-baseline w-full"
