@@ -1,7 +1,6 @@
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { WalletFormType } from '../@types/WalletFormType';
-import useForm from '../hooks/useForm';
 import Input from './Input';
 import Select from './Select';
 import Button from './Button';
@@ -29,6 +28,7 @@ const paymentOptions = [
 
 function WalletForm() {
   const dispatch: GlobalDispatch = useDispatch();
+
   const {
     editor,
     idToEdit,
@@ -36,35 +36,32 @@ function WalletForm() {
     currencies: currencyOptions,
   } = useTypedSelector((state) => state.wallet);
 
-  const foundedExpense = expenses.find((expense) => expense.id === idToEdit);
+  const [form, setForm] = useState<WalletFormType>({} as WalletFormType);
 
-  const resetValues: WalletFormType = {
-    currency: 'USD',
-    description: '',
-    method: 'Dinheiro',
-    tag: 'Alimentação',
-    value: '',
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
   };
 
-  const initialForm: WalletFormType = (editor && foundedExpense)
-    ? {
-      value: foundedExpense.value,
-      currency: foundedExpense.currency,
-      description: foundedExpense.description,
-      method: foundedExpense.method,
-      tag: foundedExpense.tag,
-    }
-    : resetValues;
-
-  const [
-    form,
-    handleChange,
-    resetForm,
-  ] = useForm<WalletFormType>(initialForm, resetValues);
+  const initialForm: WalletFormType = {
+    description: '',
+    tag: 'Alimentação',
+    value: '',
+    method: 'Dinheiro',
+    currency: 'BRL',
+  };
 
   useEffect(() => {
     dispatch(loadCurrenciesAction());
-  }, [dispatch]);
+
+    if (editor) {
+      const foundedExpense = expenses.find((expense) => expense.id === idToEdit);
+
+      setForm(foundedExpense as WalletFormType);
+    } else {
+      setForm(initialForm);
+    }
+  }, [dispatch, editor]);
 
   const isValidated: boolean = !!(
     form.description !== ''
@@ -83,7 +80,7 @@ function WalletForm() {
     } else {
       dispatch(addExpenseAction(form, expenses));
     }
-    resetForm();
+    setForm(initialForm);
   };
 
   const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
