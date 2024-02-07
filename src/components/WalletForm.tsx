@@ -61,6 +61,7 @@ function WalletForm() {
     } else {
       setForm(initialForm);
     }
+    // eslint-disable-next-line
   }, [dispatch, editor]);
 
   const isValidated: boolean = !!(
