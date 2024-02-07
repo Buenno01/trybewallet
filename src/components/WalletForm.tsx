@@ -36,19 +36,19 @@ function WalletForm() {
     currencies: currencyOptions,
   } = useTypedSelector((state) => state.wallet);
 
-  const [form, setForm] = useState<WalletFormType>({} as WalletFormType);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
-
   const initialForm: WalletFormType = {
     description: '',
     tag: 'Alimentação',
     value: '',
     method: 'Dinheiro',
     currency: 'BRL',
+  };
+
+  const [form, setForm] = useState<WalletFormType>(initialForm);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
   };
 
   useEffect(() => {
