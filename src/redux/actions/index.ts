@@ -43,25 +43,40 @@ export const loadCurrenciesAction = () => {
       const response = await fetch('https://economia.awesomeapi.com.br/json/all');
       const currencies = await response.json();
       const payload = Object.keys(currencies).filter((currency) => currency !== 'USDT');
-      dispatch(createAction<string[]>(LOAD_CURRENCIES, payload));
+      dispatch(createAction<string[]>(LOAD_CURRENCIES, ['BRL', ...payload]));
     } catch (error) {
-      dispatch(createAction<string[]>(LOAD_CURRENCIES, [] as string[]));
+      dispatch(createAction<string[]>(LOAD_CURRENCIES, ['BRL'] as string[]));
     }
   };
 };
 
 export const addExpenseAction = (expense: WalletFormType, expenses: ExpenseType[]) => {
   return async (dispatch: Dispatch<AnyAction>) => {
+    const BRL: ExchangeRates = {
+      BRL: {
+        code: 'BRL',
+        codein: 'BRL',
+        name: 'Real Brasileiro',
+        high: '1',
+        low: '1',
+        varBid: '1',
+        pctChange: '1',
+        bid: '1',
+        ask: '1',
+        timestamp: '1',
+        create_date: '1',
+      },
+    };
     try {
       const response = await fetch('https://economia.awesomeapi.com.br/json/all');
-      const currencies = await response.json();
+      const currencies: ExchangeRates = await response.json();
       const lastExpense = expenses[expenses.length - 1];
 
       const newExpense: ExpenseType = {
         ...expense,
         value: expense.value,
         id: lastExpense ? (lastExpense.id + 1) : 0,
-        exchangeRates: currencies as ExchangeRates,
+        exchangeRates: { ...currencies, ...BRL },
       };
 
       dispatch(createAction<ExpenseType>(ADD_EXPENSE, newExpense));
